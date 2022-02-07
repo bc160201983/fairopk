@@ -6,21 +6,11 @@ import Slider1 from "./components/Slider/Slider1";
 import ProductsByCategory from "./components/Products/ProductsByCategory";
 import { useEffect, useState } from "react";
 import { api } from "./lib/woo";
+import { useGlobalContext } from "./context";
 
-function App() {
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
+function App({}) {
+  const { categories } = useGlobalContext();
 
-  const fetchCategoryProducts = async () => {
-    const res = await api.get("products/categories", { per_page: 5 });
-    const data = await res.data;
-    const withProducts = data.filter((cat) => cat.count !== 0);
-    setCategories(withProducts);
-  };
-
-  useEffect(() => {
-    fetchCategoryProducts();
-  }, []);
   return (
     <div>
       <TopNav />
