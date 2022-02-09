@@ -5,7 +5,9 @@ const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const [inCart, setInCart] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [totalItemAmount, setTotalItemAmount] = useState(0);
 
   const fetchCategoryProducts = async () => {
     const res = await api.get("products/categories", { per_page: 5 });
@@ -14,7 +16,7 @@ const AppProvider = ({ children }) => {
     setCategories(withProducts);
   };
 
-  const handleCart = (id, name, price, image) => {
+  const AddToCart = (id, name, price, image) => {
     const newCartItem = {
       id: id,
       title: name,
@@ -22,16 +24,32 @@ const AppProvider = ({ children }) => {
       image: image,
       amount: 1,
     };
+
     setCart([...cart, newCartItem]);
   };
 
+  const increase = (id) => {
+    const newObj = [];
+    let tempCart = cart.map((cartItem) => {
+      if (cartItem.id === id) {
+        return { ...cartItem, amount: cartItem.amount + 1 };
+      }
+      return cartItem;
+    });
+
+    setCart(...newObj, tempCart);
+  };
+
   console.log(cart);
+
   useEffect(() => {
     fetchCategoryProducts();
   }, []);
 
   return (
-    <AppContext.Provider value={{ categories, handleCart }}>
+    <AppContext.Provider
+      value={{ categories, AddToCart, inCart, setInCart, increase, cart }}
+    >
       {children}
     </AppContext.Provider>
   );
