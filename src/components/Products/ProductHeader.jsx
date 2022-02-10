@@ -20,9 +20,9 @@ const ProductHeader = ({ title, refs }) => {
             <p className="flex-nowrap">eat fresh, stay healthy</p>
           </div>
         </div>
-        <div className="right lg:mr-2 mr-4 flex justify-center items-center content-center space-x-3">
-          <div className="flex-nowrap">see more</div>
-          <div className="">
+        <div className="right lg:mr-2 mr-4 flex sm:justify-center justify-start items-center content-center sm:space-x-3">
+          <div className="flex-nowrap float-right">see more</div>
+          <div className="sm:inline-block hidden">
             <div className="flex flex-col justify-around items-center">
               <div
                 onClick={() => scroll(-500)}
@@ -32,8 +32,9 @@ const ProductHeader = ({ title, refs }) => {
               </div>
             </div>
           </div>
+
           <div>
-            <div className="flex flex-col justify-around items-center">
+            <div className="flex flex-col justify-around items-center sm:inline-block hidden">
               <div
                 onClick={() => scroll(500)}
                 className="h-[34] w-[34] rounded-[4px] p-[8px] border border-solid border-[#dddddd] hover:bg-[#0c831f] hover:text-white cursor-pointer"

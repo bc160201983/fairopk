@@ -7,12 +7,17 @@ import ProductsByCategory from "./components/Products/ProductsByCategory";
 import { useEffect, useState } from "react";
 import { api } from "./lib/woo";
 import { useGlobalContext } from "./context";
+import Alert from "./components/Products/Alert";
 
 function App({}) {
-  const { categories } = useGlobalContext();
-
+  const { categories, alert, showAlert } = useGlobalContext();
+  console.log(alert);
   return (
     <div>
+      <div className={`snackbar ${alert.show && `show`}`}>
+        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
+      </div>
+
       <TopNav />
       <div className="max-w-screen-xl mx-auto">
         <Banner1 />

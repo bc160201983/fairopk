@@ -3,16 +3,15 @@
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Source+Sans+Pro:wght@200;300;400;700;900&display=swap");
 body {
-  font-family: "Poppins", sans-serif;
-  font-family: "Roboto", sans-serif;
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: "Poppins", "Roboto";
   /* -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
 }
 
-code {
-  font-family: source-code-pro, Poppins, Roboto, Source, "Courier New",
-    monospace;
+@layer components {
+  .snackbar {
+    @apply invisible sm:min-w-[250px] min-w-[50px] sm:ml-[-125px] ml-[-50px]  bg-[#333] opacity-[0.7] text-[#fff] text-center rounded-[2px] p-[16px] fixed z-[1] sm:left-[50%] left-[17%] bottom-[30px] text-[17px];
+  }
 }
 
 @layer utilities {
@@ -22,6 +21,71 @@ code {
       display: none;
     }
 
+    /* .snackbar {
+      visibility: hidden;
+      min-width: 250px;
+      margin-left: -125px;
+      background-color: #333;
+      opacity: 0.7;
+      color: #fff;
+      text-align: center;
+      border-radius: 2px;
+      padding: 16px;
+      position: fixed;
+      z-index: 1;
+      left: 50%;
+      bottom: 30px;
+      font-size: 17px;
+    } */
+    .show {
+      visibility: visible;
+      -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    @-webkit-keyframes fadein {
+      from {
+        bottom: 0;
+        opacity: 0;
+      }
+      to {
+        bottom: 30px;
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadein {
+      from {
+        bottom: 0;
+        opacity: 0;
+      }
+      to {
+        bottom: 30px;
+        opacity: 1;
+      }
+    }
+
+    @-webkit-keyframes fadeout {
+      from {
+        bottom: 30px;
+        opacity: 1;
+      }
+      to {
+        bottom: 0;
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeout {
+      from {
+        bottom: 30px;
+        opacity: 1;
+      }
+      to {
+        bottom: 0;
+        opacity: 0;
+      }
+    }
     .no-scrollbar {
       -ms-overflow-style: none; /* IE and Edge */
       scrollbar-width: none; /* Firefox */

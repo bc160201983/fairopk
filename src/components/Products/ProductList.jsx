@@ -17,6 +17,7 @@ const ProductList = ({
   name,
   price,
   image,
+  stock_quantity,
   handleCartCount,
   addItemButton,
 }) => {
@@ -41,7 +42,7 @@ const ProductList = ({
         {/* button */}
         <div className="relative h-[20px] ">
           <div
-            onClick={() => AddToCart(id, name, price, image)}
+            onClick={() => AddToCart(id, name, price, image, stock_quantity)}
             className="absolute rounded-[4px] cursor-pointer bg-white  bottom-1 w-[128px] flex justify-center items-center border border-solid border-[#dddddd]"
           >
             <div className="text-[#666666] flex justify-center items-center rounded-[4px]  left-[6rem] bottom-[96px] w-[36px] h-[36px]">
@@ -50,7 +51,13 @@ const ProductList = ({
           </div>
           {cart?.map((cartItem) => {
             if (cartItem.id === id) {
-              return <IncAndDec key={cartItem.id} {...cartItem} />;
+              return (
+                <IncAndDec
+                  key={cartItem.id}
+                  {...cartItem}
+                  stock_quantity={stock_quantity}
+                />
+              );
             }
           })}
         </div>

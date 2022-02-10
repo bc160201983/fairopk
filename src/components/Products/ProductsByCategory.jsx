@@ -25,6 +25,7 @@ const Products = ({ id, name }) => {
     const data = await res.data;
     setProducts(data);
   };
+
   useEffect(() => {
     fetchCatProducts();
   }, []);
