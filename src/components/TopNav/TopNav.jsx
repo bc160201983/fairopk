@@ -4,6 +4,7 @@ import {
   AiOutlineSearch,
   AiOutlineDown,
 } from "react-icons/ai";
+import { useGlobalContext } from "../../context";
 
 /**
  * Hook that alerts clicks outside of the passed ref
@@ -14,6 +15,7 @@ const TopNav = () => {
   const [addClass, setAddClass] = useState("");
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef);
+  const { total } = useGlobalContext();
   const handleSearch = () => {
     setVisible(true);
     const style = `
@@ -91,7 +93,11 @@ const TopNav = () => {
             <div className="login">login</div>
             <div className="hover:bg-[#499220] text-sm text-white w-[92px] h-[40px] cart rounded-[58px] flex justify-center items-center bg-[#0c831f]">
               <AiOutlineShoppingCart className="" />
-              <span className="px-1">my cart</span>
+              <span className="px-1">
+                {total.amount !== 0
+                  ? total.amount + " items" + " Rs" + total.total
+                  : "my cart"}
+              </span>
             </div>
           </div>
         </div>

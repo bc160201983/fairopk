@@ -9,6 +9,7 @@ const AppProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
   const [totalItemAmount, setTotalItemAmount] = useState(0);
   const [alert, setAlert] = useState({ show: false, msg: "" });
+  const [total, setTotal] = useState({ amount: 0, total: 0 });
 
   const fetchCategoryProducts = async () => {
     const res = await api.get("products/categories", { per_page: 5 });
@@ -60,6 +61,33 @@ const AppProvider = ({ children }) => {
     setAlert({ show: show, msg: "Sorry, you can't add more of this item." });
   };
 
+  const getTotal = () => {
+    let { total, amount } = cart.reduce(
+      (cartTotal, cartItem) => {
+        const { price, amount } = cartItem;
+        const itemTotal = price * amount;
+        cartTotal.total += itemTotal;
+        cartTotal.amount += amount;
+        return cartTotal;
+      },
+      {
+        total: 0,
+        amount: 0,
+      }
+    );
+    total = parseFloat(total.toFixed(2));
+
+    console.log(total, amount);
+
+    setTotal((prev) => {
+      return { ...prev, amount, total };
+    });
+  };
+
+  useEffect(() => {
+    getTotal();
+  }, [cart]);
+
   useEffect(() => {
     fetchCategoryProducts();
   }, []);
@@ -77,6 +105,7 @@ const AppProvider = ({ children }) => {
         alert,
         setAlert,
         showAlert,
+        total,
       }}
     >
       {children}

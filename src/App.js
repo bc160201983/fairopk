@@ -11,7 +11,7 @@ import Alert from "./components/Products/Alert";
 
 function App({}) {
   const { categories, alert, showAlert } = useGlobalContext();
-  console.log(alert);
+
   return (
     <div>
       <div className={`snackbar ${alert.show && `show`}`}>
