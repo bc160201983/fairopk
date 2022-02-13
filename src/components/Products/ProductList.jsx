@@ -45,7 +45,7 @@ const ProductList = ({
             }
             className={`
             ${
-              outOfStock(stock_status) && `pointer-events-none bg-[#ccad00]`
+              outOfStock(stock_status) && `bg-[#ccad00]`
             } absolute rounded-[4px] cursor-pointer bg-white  bottom-1 w-[128px] flex justify-center items-center border border-solid border-[#dddddd]`}
           >
             <div
