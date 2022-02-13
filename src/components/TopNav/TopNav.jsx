@@ -92,60 +92,34 @@ const TopNav = () => {
             </div>
             <div className="login font-medium text-[14px]">login</div>
             <div className="hover:bg-[#499220] text-sm text-white w-[92px] h-[40px] cart rounded-[58px] flex justify-center items-center bg-[#0c831f]">
-              <AiOutlineShoppingCart className="" />
-              <span className="px-1">
-                {total.amount !== 0
-                  ? total.amount + " items" + " Rs" + total.total
-                  : "my cart"}
+              <span className="flex justify-center text-center flex-shrink-0 pr-2">
+                <AiOutlineShoppingCart className="w-[16px] h-[16px]" />
               </span>
+              {total.amount !== 0 ? (
+                <div className="flex flex-col justify-start items-center">
+                  <div className="item-count text-[12px] text-left pt-2 pr-2 font-[200]">
+                    {total.amount} items
+                  </div>
+                  <div className="cart-item-total font-bold text-[12px] pb-2 pr-2">
+                    Rs{total.total}
+                  </div>
+                </div>
+              ) : (
+                <div className="font-[200] text-[14px]">my cart</div>
+              )}
             </div>
           </div>
         </div>
       </nav>
-      {/* <nav className="md:flex md:justify-center w-full items-center space-x-40 md:items-center bg-[#FFe141] md:h-[64px] h-[120px] sm:z-[1000] sticky">
-        <div className="md:flex md:flex-row md:items-center flex flex-col items-center space-x-10">
-          <div className="md:visible invisible">
-            <img
-              width="70"
-              heigh="35"
-              className="w-95 h-35"
-              src="https://i0.wp.com/fairo.pk/wp-content/uploads/2019/02/fairo.pk_d00a_04a_1_300x224.png?fit=300%2C224&ssl=1"
-              alt="logo"
-            />
-          </div>
-          <div className="sm:flex sm:items-center h-[66px] sm:text-[15px] font-thin sm:visible flex items-center">
-            delivery in 8 minuts
-            <AiOutlineDown className="ml-1" />
-          </div>
-        </div>
-
-        <div className="search-input md:w-1/2 border-solid	border-[D8D8D8] relative">
-          <button className="absolute block top-0	left-0 h-[42px] w-[40px] text-[#999999] leading-[27.6px] pl-2 text-[24px]">
-            <AiOutlineSearch className="" />
-          </button>
-          <input
-            placeholder="Search for products"
-            className="md:w-full h-11 rounded-[8px] mr-[-43px] pr-[16px] pl-[48px] focus:outline-none"
-            type="text"
-          />
-        </div>
-        <div className="md:flex md:flex-row md:items-center flex flex-col items-center space-x-10">
-          <div className="sm:visible invisible">
-            <a href="" className="font-medium text-[14px]">
-              Categories
-            </a>
-          </div>
-          <div className="sm:font-medium sm:text-[14px] sm:visible invisible">
-            Login
-          </div>
-          <div className="hover:bg-[#499220] text-sm text-white w-[92px] h-[40px] cart rounded-[58px] flex justify-center items-center bg-[#0c831f]">
-            <AiOutlineShoppingCart className="" />
-            <span className="px-1">my cart</span>
-          </div>
-        </div>
-      </nav> */}
     </>
   );
 };
-
+{
+  /* {total.amount !== 0
+                  ? total.amount + " items" + " Rs" + total.total
+                  : "my cart"} */
+}
+{
+  /* <div className="px-1">my cart</div>; */
+}
 export default TopNav;
