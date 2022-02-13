@@ -44,9 +44,9 @@ const ProductList = ({
                 : null
             }
             className={`
-            ${outOfStock(stock_status) && `pointer-events-none bg-[#ccad00]`}
-            
-            absolute rounded-[4px] cursor-pointer bg-white  bottom-1 w-[128px] flex justify-center items-center border border-solid border-[#dddddd]`}
+            ${
+              outOfStock(stock_status) && `pointer-events-none bg-[#ccad00]`
+            } absolute rounded-[4px] cursor-pointer bg-white  bottom-1 w-[128px] flex justify-center items-center border border-solid border-[#dddddd]`}
           >
             <div
               className={`text-[#666666] flex justify-center items-center rounded-[4px]  left-[6rem] bottom-[96px] w-[36px] h-[36px]`}
