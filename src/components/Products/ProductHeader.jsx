@@ -21,7 +21,7 @@ const ProductHeader = ({ title, refs }) => {
             <div className="flex flex-col justify-center items-center">
               <div
                 onClick={() => scroll(-500)}
-                className="h-[34] w-[34] rounded-[4px] p-[8px] border border-solid border-[#dddddd] hover:bg-[#0c831f] hover:text-white cursor-pointer"
+                className="h-[34] w-[34] rounded-[4px] p-[8px] border border-solid border-[#dddddd] hover:bg-[#0c831f] hover:transition-all hover:text-white cursor-pointer"
               >
                 <AiOutlineLeft />
               </div>
@@ -31,7 +31,7 @@ const ProductHeader = ({ title, refs }) => {
           <div className="flex flex-col justify-center items-center sm:inline-block hidden">
             <div
               onClick={() => scroll(500)}
-              className="h-[34] w-[34] rounded-[4px] p-[8px] border border-solid border-[#dddddd] hover:bg-[#0c831f] hover:text-white cursor-pointer"
+              className="h-[34] w-[34] rounded-[4px] p-[8px] border border-solid border-[#dddddd] hover:bg-[#0c831f] hover:transition-all hover:text-white cursor-pointer"
             >
               <AiOutlineRight />
             </div>

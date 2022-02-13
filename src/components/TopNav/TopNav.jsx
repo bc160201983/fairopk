@@ -15,13 +15,9 @@ const TopNav = () => {
   const [addClass, setAddClass] = useState("");
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef);
-  const { total } = useGlobalContext();
+  const { total, openCartModal } = useGlobalContext();
   const handleSearch = () => {
     setVisible(true);
-    const style = `
-    backgroundColor: "black",
-    
-    `;
   };
 
   function useOutsideAlerter(ref) {
@@ -29,6 +25,7 @@ const TopNav = () => {
       /**
        * Alert if clicked on outside of element
        */
+
       function handleClickOutside(event) {
         if (ref.current && !ref.current.contains(event.target)) {
           setVisible(false);
@@ -63,7 +60,7 @@ const TopNav = () => {
             </div>
           </div>
           <div
-            className="middle-header lg:w-1/2 w-full mx-auto mt-2"
+            className=" middle-header lg:w-1/2 w-full mx-auto mt-2"
             onClick={handleSearch}
           >
             <div className="search-input  border-solid	border-[D8D8D8] relative">
@@ -81,7 +78,7 @@ const TopNav = () => {
                 <div
                   ref={wrapperRef}
                   id="myModal"
-                  className={`bg-white w-full h-52 absolute rounded-b-[8px] z-[2001] my-modal ease-in duration-300	`}
+                  className={`search-modal bg-white w-full h-52 absolute rounded-b-[8px] z-[2001] my-modal ease-in duration-300	`}
                 ></div>
               )}
             </div>
@@ -91,7 +88,10 @@ const TopNav = () => {
               <a href="#">Categories</a>
             </div>
             <div className="login font-medium text-[14px]">login</div>
-            <div className="hover:bg-[#499220] text-sm text-white w-[92px] h-[40px] cart rounded-[58px] flex justify-center items-center bg-[#0c831f]">
+            <div
+              onClick={() => openCartModal(true)}
+              className="hover:bg-[#499220] text-sm text-white w-[92px] h-[40px] cart rounded-[58px] flex justify-center items-center bg-[#0c831f] cursor-pointer hover:transition-all"
+            >
               <span className="flex justify-center text-center flex-shrink-0 pr-2">
                 <AiOutlineShoppingCart className="w-[16px] h-[16px]" />
               </span>

@@ -8,17 +8,18 @@ import { useEffect, useState } from "react";
 import { api } from "./lib/woo";
 import { useGlobalContext } from "./context";
 import Alert from "./components/Products/Alert";
+import Cart from "./components/Products/Cart";
 
 function App({}) {
-  const { categories, alert, showAlert } = useGlobalContext();
+  const { categories, alert, showAlert, cartVisible } = useGlobalContext();
 
   return (
     <div>
       <div className={`snackbar ${alert.show && `show`}`}>
         {alert.show && <Alert {...alert} removeAlert={showAlert} />}
       </div>
-
       <TopNav />
+      {cartVisible && <Cart />}
       <div className="max-w-screen-xl mx-auto">
         <Banner1 />
         <AppdownloadBanner />

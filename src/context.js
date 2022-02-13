@@ -2,14 +2,27 @@ import React, { useState, useContext, useEffect, useReducer } from "react";
 import { api } from "./lib/woo";
 // make sure to use https
 const AppContext = React.createContext();
+const getLocalStorage = () => {
+  let cart = localStorage.getItem("cart");
+  if (cart) {
+    return (cart = JSON.parse(localStorage.getItem("cart")));
+  } else {
+    return [];
+  }
+};
 
 const AppProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(getLocalStorage());
   const [inCart, setInCart] = useState(false);
   const [categories, setCategories] = useState([]);
   const [totalItemAmount, setTotalItemAmount] = useState(0);
   const [alert, setAlert] = useState({ show: false, msg: "" });
   const [total, setTotal] = useState({ amount: 0, total: 0 });
+  const [cartVisible, setCartVisible] = useState(false);
+
+  const openCartModal = () => {
+    setCartVisible(true);
+  };
 
   const fetchCategoryProducts = async () => {
     const res = await api.get("products/categories", {
@@ -89,10 +102,18 @@ const AppProvider = ({ children }) => {
     });
   };
 
+  // function afterOpenModal() {
+  //   // references are now sync'd and can be accessed.
+  //   subtitle.style.color = "#f00";
+  // }
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
   useEffect(() => {
     getTotal();
   }, [cart]);
-
   useEffect(() => {
     fetchCategoryProducts();
   }, []);
@@ -100,6 +121,9 @@ const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
+        cartVisible,
+        setCartVisible,
+        openCartModal,
         categories,
         AddToCart,
         inCart,
