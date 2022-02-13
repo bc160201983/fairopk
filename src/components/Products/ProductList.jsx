@@ -26,7 +26,7 @@ const ProductList = ({
 
   return (
     <div>
-      <div className="product-info relative flex flex-col hover:shadow-lg hover:rounded-[9px] cursor-pointer">
+      <div className="product-info relative flex flex-col hover:transition-all sm:hover:shadow-lg hover:rounded-[9px] cursor-pointer">
         <div className="relative w-[126px] flex justify-center items-center h-[126px] rounded-[9px] border border-solid border-[#f2f2f2]">
           <img
             src={image === undefined ? default_image : image?.src}

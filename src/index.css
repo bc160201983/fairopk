@@ -12,13 +12,10 @@ body {
   .snackbar {
     @apply invisible sm:min-w-[250px] min-w-[50px] sm:ml-[-125px] ml-[-50px]  bg-[#333] opacity-[0.7] text-[#fff] text-center rounded-[2px] p-[16px] fixed z-[1] sm:left-[50%] left-[17%] bottom-[30px] text-[17px];
   }
-  /* .overlay {
-    @apply bg-[rgba(0,0,0,0.75)] fixed top-0 w-[100%] h-[100vh] z-[9999];
-  }
+
   .modal {
     @apply h-[100vh] sm:w-[360px] w-full float-right bg-white transition ease-in-out duration-700 delay-700;
-  } */
-
+  }
   .overlay-search {
     @apply bg-[rgba(0,0,0,0.75)] fixed top-0 w-[100%] h-[100vh] z-[9999];
   }
@@ -29,6 +26,9 @@ body {
     /* Chrome, Safari and Opera */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
+    }
+    .shadow-top {
+      box-shadow: 0px -10px 28px -9px rgba(0, 0, 0, 0.78);
     }
     .search-modal {
       -webkit-animation-name: OverlyfadeIn; /* Fade in the background */
@@ -56,7 +56,7 @@ body {
       position: fixed;
       right: 0;
       background-color: #fefefe;
-      width: 360px;
+
       height: 100vh;
       -webkit-animation-name: slideIn;
       -webkit-animation-duration: 0.4s;
