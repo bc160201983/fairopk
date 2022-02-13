@@ -1,11 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  AiOutlineLeft,
-  AiOutlineRight,
-  AiOutlinePlus,
-  AiOutlineLine,
-  AiOutlineMinus,
-} from "react-icons/ai";
+
 import { useGlobalContext } from "../../context";
 import IncAndDec from "./IncAndDec";
 
@@ -18,10 +12,12 @@ const ProductList = ({
   price,
   image,
   stock_quantity,
+  stock_status,
   handleCartCount,
   addItemButton,
 }) => {
-  const { AddToCart, inCart, setInCart, increase, cart } = useGlobalContext();
+  const { AddToCart, inCart, setInCart, increase, cart, outOfStock } =
+    useGlobalContext();
 
   // const style = {
   //   trasnform: "translateY(10px)",
@@ -42,11 +38,26 @@ const ProductList = ({
         {/* button */}
         <div className="relative h-[20px] ">
           <div
-            onClick={() => AddToCart(id, name, price, image, stock_quantity)}
-            className="absolute rounded-[4px] cursor-pointer bg-white  bottom-1 w-[128px] flex justify-center items-center border border-solid border-[#dddddd]"
+            onClick={
+              !outOfStock(stock_status)
+                ? () => AddToCart(id, name, price, image, stock_quantity)
+                : null
+            }
+            className={`
+            ${outOfStock(stock_status) && `pointer-events-none bg-[#ccad00]`}
+            
+            absolute rounded-[4px] cursor-pointer bg-white  bottom-1 w-[128px] flex justify-center items-center border border-solid border-[#dddddd]`}
           >
-            <div className="text-[#666666] flex justify-center items-center rounded-[4px]  left-[6rem] bottom-[96px] w-[36px] h-[36px]">
-              add
+            <div
+              className={`text-[#666666] flex justify-center items-center rounded-[4px]  left-[6rem] bottom-[96px] w-[36px] h-[36px]`}
+            >
+              {outOfStock(stock_status) ? (
+                <div className="text-sm whitespace-nowrap text-white">
+                  out of stock
+                </div>
+              ) : (
+                "add"
+              )}
             </div>
           </div>
           {cart?.map((cartItem) => {
@@ -63,10 +74,12 @@ const ProductList = ({
         </div>
 
         <div className="p-0">
-          <div className="product-name pt-1 truncate">{name.slice(0, 15)}</div>
+          <div className="product-name pt-1 truncate text-[14px]">
+            {name.slice(0, 15)}
+          </div>
           <div className="weight whitespace-nowrap">1Kg</div>
-          <div className="price whitespace-nowrap">
-            <strong>Rs</strong>
+          <div className="price whitespace-nowrap font-bold	">
+            Rs
             {Math.trunc(price)}
           </div>
         </div>

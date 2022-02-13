@@ -1,10 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import {
-  AiOutlineLeft,
-  AiOutlineRight,
-  AiOutlinePlus,
-  AiOutlineLine,
-} from "react-icons/ai";
+
 import ProductHeader from "./ProductHeader";
 import ProductList from "./ProductList";
 import { api } from "../../lib/woo";

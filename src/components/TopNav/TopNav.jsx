@@ -87,10 +87,10 @@ const TopNav = () => {
             </div>
           </div>
           <div className="right-header lg:w-1/4 flex justify-evenly items-center mt-2">
-            <div className="categories">
+            <div className="categories font-medium text-[14px]">
               <a href="#">Categories</a>
             </div>
-            <div className="login">login</div>
+            <div className="login font-medium text-[14px]">login</div>
             <div className="hover:bg-[#499220] text-sm text-white w-[92px] h-[40px] cart rounded-[58px] flex justify-center items-center bg-[#0c831f]">
               <AiOutlineShoppingCart className="" />
               <span className="px-1">

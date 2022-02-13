@@ -12,7 +12,10 @@ const AppProvider = ({ children }) => {
   const [total, setTotal] = useState({ amount: 0, total: 0 });
 
   const fetchCategoryProducts = async () => {
-    const res = await api.get("products/categories", { per_page: 5 });
+    const res = await api.get("products/categories", {
+      per_page: 5,
+      include: [168],
+    });
     const data = await res.data;
     const withProducts = data.filter((cat) => cat.count !== 0);
     setCategories(withProducts);
@@ -29,6 +32,10 @@ const AppProvider = ({ children }) => {
     };
 
     setCart([...cart, newCartItem]);
+  };
+
+  const outOfStock = (stock_status) => {
+    return stock_status === "outofstock";
   };
 
   const increase = (id, stock_quantity) => {
@@ -77,8 +84,6 @@ const AppProvider = ({ children }) => {
     );
     total = parseFloat(total.toFixed(2));
 
-    console.log(total, amount);
-
     setTotal((prev) => {
       return { ...prev, amount, total };
     });
@@ -106,6 +111,7 @@ const AppProvider = ({ children }) => {
         setAlert,
         showAlert,
         total,
+        outOfStock,
       }}
     >
       {children}
