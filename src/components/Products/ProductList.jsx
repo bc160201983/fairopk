@@ -48,17 +48,19 @@ const ProductList = ({
               outOfStock(stock_status) && `bg-[#ccad00]`
             } absolute rounded-[4px] cursor-pointer bg-white  bottom-1 w-[128px] flex justify-center items-center border border-solid border-[#dddddd]`}
           >
-            <div
-              className={`text-[#666666] flex justify-center items-center rounded-[4px]  left-[6rem] bottom-[96px] w-[36px] h-[36px]`}
-            >
-              {outOfStock(stock_status) ? (
-                <div className="text-sm whitespace-nowrap text-white">
-                  out of stock
-                </div>
-              ) : (
-                "add"
-              )}
-            </div>
+            {outOfStock(stock_status) ? (
+              <div
+                className={`whitespace-nowrap text-white flex justify-center items-center rounded-[4px]  left-[6rem] bottom-[96px] w-[36px] h-[36px]`}
+              >
+                out of stock
+              </div>
+            ) : (
+              <div
+                className={`text-[#666666] flex justify-center items-center rounded-[4px]  left-[6rem] bottom-[96px] w-[36px] h-[36px]`}
+              >
+                add
+              </div>
+            )}
           </div>
           {cart?.map((cartItem) => {
             if (cartItem.id === id) {
