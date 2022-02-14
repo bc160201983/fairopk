@@ -3,12 +3,12 @@ import "./App.css";
 import Banner1 from "./components/Banner/Banner1";
 import AppdownloadBanner from "./components/Banner/AppdownloadBanner";
 import Slider1 from "./components/Slider/Slider1";
-import ProductsByCategory from "./components/Products/ProductsByCategory";
+import ProductsByCategory from "./components/Home/ProductsByCategory";
 import { useEffect, useState } from "react";
 import { api } from "./lib/woo";
 import { useGlobalContext } from "./context";
-import Alert from "./components/Products/Alert";
-import Cart from "./components/Products/Cart";
+import Alert from "./components/Home/Alert";
+import Cart from "./components/cart/Cart";
 
 function App({}) {
   const { categories, alert, showAlert, cartVisible } = useGlobalContext();

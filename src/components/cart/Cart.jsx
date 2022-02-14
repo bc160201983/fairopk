@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
-import { AiOutlineClose, AiOutlineRight } from "react-icons/ai";
+import { AiOutlineClose, AiTwotoneAlert } from "react-icons/ai";
 import Modal from "react-modal";
 import { useGlobalContext } from "../../context";
+import CartItems from "./CartItems";
+import Footer from "./Footer";
 
 const Cart = () => {
-  const { setCartVisible } = useGlobalContext();
+  const { setCartVisible, total } = useGlobalContext();
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef);
 
@@ -34,27 +36,32 @@ const Cart = () => {
       <div className="modal relative" ref={wrapperRef}>
         <div className="flex justify-between items-center p-[16px] h-[64px] shadow-lg sticky top-0">
           <div className="font-bold text-[24px]">my cart</div>
-          <div>
+          <div
+            className="w-[28] h-[28] text-[28px] cursor-pointer"
+            onClick={() => setCartVisible(false)}
+          >
             <AiOutlineClose />
           </div>
         </div>
+        <div className="contant bg-gray-200 overflow-auto">
+          <div className="shipment text-[12px] flex flex-row justify-between items-center px-4 h-[40px] ">
+            <div>shipment 1 of 1</div>
+            <div>{total.amount} item(s)</div>
+          </div>
 
-        {/* foooter */}
-        <div className="shadow-top top-[978px] flex items-center p-[16px] sticky bottom-0 h-[69px]">
-          <div className="flex justify-between items-center font-bold p-[16px] w-full rounded-md text-white bg-green-800">
-            <div className="left flex items-center">
-              <div className="items">1 item</div>
-              <div></div>
-              <div className="total-price">Rs305</div>
+          <div className="delivery-time h-[72px] p-[16px] bg-white">
+            <div className="font-bold text-[16px] whitespace-nowrap max-w-full">
+              delivery in 12 minutes
             </div>
-            <div className="right flex items-center">
-              <div>proceed</div>
-              <div>
-                <AiOutlineRight />
-              </div>
+            <div className="pt-[4px] text-[12px]">
+              from Super Store - Mumbai Kurla West ES24
             </div>
           </div>
+          <CartItems />
         </div>
+
+        {/* foooter */}
+        <Footer />
       </div>
     </div>
   );
