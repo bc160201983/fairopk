@@ -16,7 +16,9 @@ const Products = ({ id, name }) => {
     SetAddItemButton(true);
   };
   const fetchCatProducts = async () => {
-    const res = await api.get("products", { category: parseInt(id) });
+    const res = await api.get("products", {
+      category: parseInt(id),
+    });
     const data = await res.data;
     setProducts(data);
   };

@@ -45,7 +45,7 @@ const ProductList = ({
             }
             className={`
             ${
-              outOfStock(stock_status) && `bg-[#ccad00]`
+              outOfStock(stock_status) ? `bg-[#ccad00]` : `bg-white`
             } absolute rounded-[4px] cursor-pointe bottom-1 w-[128px] flex justify-center items-center border border-solid border-[#dddddd]`}
           >
             {outOfStock(stock_status) ? (
@@ -56,7 +56,7 @@ const ProductList = ({
               </div>
             ) : (
               <div
-                className={`text-[#666666] flex justify-center items-center rounded-[4px]  left-[6rem] bottom-[96px] w-[36px] h-[36px]`}
+                className={`text-[#0c831F] flex justify-center items-center rounded-[4px]  left-[6rem] bottom-[96px] w-[36px] h-[36px]`}
               >
                 add
               </div>

@@ -3,8 +3,10 @@ import ReactDOM from "react-dom";
 import { AiOutlineClose, AiTwotoneAlert } from "react-icons/ai";
 import Modal from "react-modal";
 import { useGlobalContext } from "../../context";
+import BillDetails from "./BillDetails";
 import CartItems from "./CartItems";
 import Footer from "./Footer";
+import ProductSlider from "./ProductSlider";
 
 const Cart = () => {
   const { setCartVisible, total, cart } = useGlobalContext();
@@ -60,6 +62,8 @@ const Cart = () => {
           {cart.map((item) => {
             return <CartItems key={item.id} {...item} />;
           })}
+          <BillDetails />
+          <ProductSlider />
         </div>
 
         {/* foooter */}
