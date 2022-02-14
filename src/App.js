@@ -14,19 +14,23 @@ function App({}) {
   const { categories, alert, showAlert, cartVisible } = useGlobalContext();
 
   return (
-    <div>
+    <div className="">
       <div className={`snackbar ${alert.show && `show`}`}>
         {alert.show && <Alert {...alert} removeAlert={showAlert} />}
       </div>
+
       <TopNav />
+
       {cartVisible && <Cart />}
-      <div className="max-w-screen-xl mx-auto">
-        <Banner1 />
-        <AppdownloadBanner />
-        <Slider1 />
-        {categories.map((category) => (
-          <ProductsByCategory key={category.id} {...category} />
-        ))}
+      <div className="w-full overflow-y-auto h-screen">
+        <div className="max-w-screen-xl mx-auto">
+          <Banner1 />
+          <AppdownloadBanner />
+          <Slider1 />
+          {categories.map((category) => (
+            <ProductsByCategory key={category.id} {...category} />
+          ))}
+        </div>
       </div>
     </div>
   );

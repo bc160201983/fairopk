@@ -6,7 +6,7 @@ const Footer = () => {
   const { total } = useGlobalContext();
   return (
     <>
-      <div className="shadow-top top-[978px] flex items-center pt-[8px] p-[16px] sticky bottom-0 h-[68px]">
+      <div className="shadow-top top-[calc(100vh - 64px)] flex items-center pt-[8px] p-[16px] sticky bottom-0 h-[68px] bg-white">
         <div className="flex cursor-pointer justify-between items-center font-bold p-[12px] pr-[16px] w-full rounded-[4px] text-[14px] text-white bg-[#0c831F]">
           <div className="left flex space-x-2 justify-center items-center">
             <div className="items">{total.amount} item</div>

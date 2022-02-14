@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useGlobalContext } from "../../context";
 import IncAndDec from "./IncAndDec";
 
-const default_image =
+export const default_image =
   "https://i0.wp.com/fairo.pk/wp-content/uploads/2019/02/fairo.pk_d00a_04a_1_300x224.png?fit=300%2C224&ssl=1";
 
 const ProductList = ({

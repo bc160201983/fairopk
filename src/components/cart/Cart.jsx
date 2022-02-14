@@ -7,7 +7,7 @@ import CartItems from "./CartItems";
 import Footer from "./Footer";
 
 const Cart = () => {
-  const { setCartVisible, total } = useGlobalContext();
+  const { setCartVisible, total, cart } = useGlobalContext();
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef);
 
@@ -33,8 +33,8 @@ const Cart = () => {
 
   return (
     <div className="overlay">
-      <div className="modal relative" ref={wrapperRef}>
-        <div className="flex justify-between items-center p-[16px] h-[64px] shadow-lg sticky top-0">
+      <div className="modal overflow-hidden h-screen relative" ref={wrapperRef}>
+        <div className="flex justify-between items-center p-[16px] z-[2000] h-[64px] shadow-lg sticky top-0 bg-white">
           <div className="font-bold text-[24px]">my cart</div>
           <div
             className="w-[28] h-[28] text-[28px] cursor-pointer"
@@ -43,7 +43,7 @@ const Cart = () => {
             <AiOutlineClose />
           </div>
         </div>
-        <div className="contant bg-gray-200 overflow-auto">
+        <div className="contant bg-gray-200 overflow-y-auto h-[calc(100vh-132px)]">
           <div className="shipment text-[12px] flex flex-row justify-between items-center px-4 h-[40px] ">
             <div>shipment 1 of 1</div>
             <div>{total.amount} item(s)</div>
@@ -57,7 +57,9 @@ const Cart = () => {
               from Super Store - Mumbai Kurla West ES24
             </div>
           </div>
-          <CartItems />
+          {cart.map((item) => {
+            return <CartItems key={item.id} {...item} />;
+          })}
         </div>
 
         {/* foooter */}

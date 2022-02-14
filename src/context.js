@@ -27,7 +27,6 @@ const AppProvider = ({ children }) => {
   const fetchCategoryProducts = async () => {
     const res = await api.get("products/categories", {
       per_page: 5,
-      include: [168],
     });
     const data = await res.data;
     const withProducts = data.filter((cat) => cat.count !== 0);
@@ -102,16 +101,8 @@ const AppProvider = ({ children }) => {
     });
   };
 
-  // function afterOpenModal() {
-  //   // references are now sync'd and can be accessed.
-  //   subtitle.style.color = "#f00";
-  // }
-
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
-
-  useEffect(() => {
     getTotal();
   }, [cart]);
   useEffect(() => {
