@@ -112,6 +112,7 @@ const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
+        fetchCategoryProducts,
         cartVisible,
         setCartVisible,
         openCartModal,

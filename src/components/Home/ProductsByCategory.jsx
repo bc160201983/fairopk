@@ -7,14 +7,9 @@ import { api } from "../../lib/woo";
 const Products = ({ id, name }) => {
   const ref = useRef(null);
   const [products, setProducts] = useState([]);
-  const [addItemButton, SetAddItemButton] = useState(false);
 
   //   const fetchCet
 
-  const handleCartCount = () => {
-    console.log("clicked");
-    SetAddItemButton(true);
-  };
   const fetchCatProducts = async () => {
     const res = await api.get("products", {
       category: parseInt(id),
@@ -37,15 +32,7 @@ const Products = ({ id, name }) => {
         {products.map((product) => {
           const image = product.images[0];
 
-          return (
-            <ProductList
-              key={product.id}
-              handleCartCount={handleCartCount}
-              addItemButton={addItemButton}
-              image={image}
-              {...product}
-            />
-          );
+          return <ProductList key={product.id} image={image} {...product} />;
         })}
       </div>
     </div>

@@ -1,31 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useGlobalContext } from "../../context";
+import { api } from "../../lib/woo";
 import IncAndDec from "../Home/IncAndDec";
+import Addbtn from "./AddBtn";
+import CartProductList from "./CartProductList";
 
-const ProductSlider = () => {
+const ProductSlider = ({ id, name }) => {
+  const { cart } = useGlobalContext();
+  // const { id, name } = category[0];
+  const [products, setProducts] = useState([]);
+
+  const fetchCatProducts = async () => {
+    const res = await api.get("products", {
+      category: parseInt(id),
+    });
+    const data = await res.data;
+    setProducts(data);
+  };
+
+  useEffect(() => {
+    fetchCatProducts();
+  }, []);
+
   return (
-    <div className="bg-white mt-2 w-full">
-      <div className="header flex justify-between p-[16px] text-center">
-        <div className="title font-bold text-[18px]">
-          fresh fruits & vegetables
-        </div>
-        <div className="link">see more</div>
+    <div className={`bg-white h-[350px] mb-4 ${cart.length !== 0 && `mt-2`}`}>
+      <div className="header flex justify-between p-[16px] items-center">
+        <div className="title font-bold text-[18px]">{name}</div>
+        <div className="link py-1 font-medium text-[14px]">see more</div>
       </div>
-
-      <div className="product">
-        <div className="image">
-          <img
-            src="https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=50,metadata=none,h=140/app/images/products/sliding_image/3983a.jpg?ts=1637669584"
-            alt=""
-          />
-        </div>
-        <div className="item-details">
-          <div className="price">Rs213</div>
-          <div className="product-title">Kimia Dates (Khajur) - Packets</div>
-          <div className="weight">500 g</div>
-          <div className="btn">
-            <IncAndDec />
-          </div>
-        </div>
+      <div className="flex overflow-x-auto">
+        {products.map((item) => {
+          return <CartProductList key={item.id} {...item} />;
+        })}
       </div>
     </div>
   );

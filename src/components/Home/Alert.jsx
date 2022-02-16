@@ -7,7 +7,11 @@ const Alert = ({ removeAlert, msg }) => {
     }, 3000);
     return () => clearTimeout(timeout);
   }, []);
-  return <p>{msg}</p>;
+  return (
+    <div className="">
+      <p>{msg}</p>
+    </div>
+  );
 };
 
 export default Alert;

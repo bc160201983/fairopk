@@ -3,13 +3,18 @@ import ReactDOM from "react-dom";
 import { AiOutlineClose, AiTwotoneAlert } from "react-icons/ai";
 import Modal from "react-modal";
 import { useGlobalContext } from "../../context";
+import { api } from "../../lib/woo";
+import Alert from "../Home/Alert";
 import BillDetails from "./BillDetails";
 import CartItems from "./CartItems";
+import EmptyCart from "./EmptyCart";
 import Footer from "./Footer";
 import ProductSlider from "./ProductSlider";
+import ShiptAndDelivery from "./ShiptAndDelivery";
 
 const Cart = () => {
-  const { setCartVisible, total, cart } = useGlobalContext();
+  const { setCartVisible, total, cart, showAlert } = useGlobalContext();
+  const [category, setCategory] = useState([]);
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef);
 
@@ -33,6 +38,19 @@ const Cart = () => {
     }, [ref]);
   }
 
+  const fetchSingleCategory = async (catId) => {
+    const res = await api.get("products/categories", {
+      include: catId,
+    });
+    const data = await res.data;
+    const withProducts = data.filter((cat) => cat.count !== 0);
+    setCategory(withProducts);
+  };
+
+  useEffect(() => {
+    fetchSingleCategory(169);
+  }, []);
+
   return (
     <div className="overlay">
       <div className="modal overflow-hidden h-screen relative" ref={wrapperRef}>
@@ -45,29 +63,26 @@ const Cart = () => {
             <AiOutlineClose />
           </div>
         </div>
-        <div className="contant bg-gray-200 overflow-y-auto h-[calc(100vh-132px)]">
-          <div className="shipment text-[12px] flex flex-row justify-between items-center px-4 h-[40px] ">
-            <div>shipment 1 of 1</div>
-            <div>{total.amount} item(s)</div>
-          </div>
-
-          <div className="delivery-time h-[72px] p-[16px] bg-white">
-            <div className="font-bold text-[16px] whitespace-nowrap max-w-full">
-              delivery in 12 minutes
-            </div>
-            <div className="pt-[4px] text-[12px]">
-              from Super Store - Mumbai Kurla West ES24
-            </div>
-          </div>
+        <div
+          className={`contant bg-gray-200 overflow-y-auto ${
+            cart.length !== 0 ? `h-[calc(100vh-132px)]` : `h-full`
+          } `}
+        >
+          {cart.length !== 0 ? <ShiptAndDelivery /> : <EmptyCart />}
           {cart.map((item) => {
             return <CartItems key={item.id} {...item} />;
           })}
-          <BillDetails />
-          <ProductSlider />
+          {cart.length !== 0 && <BillDetails />}
+
+          {category.map((cart) => {
+            return (
+              <ProductSlider key={cart.id} id={cart.id} name={cart.name} />
+            );
+          })}
         </div>
 
         {/* foooter */}
-        <Footer />
+        {cart.length !== 0 && <Footer className={"bg-gray-200"} />}
       </div>
     </div>
   );

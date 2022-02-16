@@ -6,7 +6,7 @@ const CartItems = ({ id, title, price, image, amount, stock_quantity }) => {
   return (
     <div>
       <div className="product-list h-[140px] mt-[2px] flex bg-white">
-        <div className="product-image h-[140px] w-[124px]">
+        <div className="product-image h-[140px] w-[124px] flex justify-center items-center">
           <img
             className=""
             src={image === undefined ? default_image : image?.src}

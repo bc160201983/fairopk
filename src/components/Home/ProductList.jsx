@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 
 import { useGlobalContext } from "../../context";
+import AddtoCartBtns from "../AddToCartBtn/AddtoCartBtns";
 import IncAndDec from "./IncAndDec";
 
 export const default_image =
@@ -13,12 +14,8 @@ const ProductList = ({
   image,
   stock_quantity,
   stock_status,
-  handleCartCount,
-  addItemButton,
 }) => {
-  const { AddToCart, inCart, setInCart, increase, cart, outOfStock } =
-    useGlobalContext();
-
+  const { AddToCart, cart, outOfStock } = useGlobalContext();
   // const style = {
   //   trasnform: "translateY(10px)",
   //   backgroundColor: "pink",
@@ -37,31 +34,14 @@ const ProductList = ({
 
         {/* button */}
         <div className="relative h-[20px] ">
-          <div
-            onClick={
-              !outOfStock(stock_status)
-                ? () => AddToCart(id, name, price, image, stock_quantity)
-                : null
-            }
-            className={`
-            ${
-              outOfStock(stock_status) ? `bg-[#ccad00]` : `bg-white`
-            } absolute rounded-[4px] cursor-pointe bottom-1 w-[128px] flex justify-center items-center border border-solid border-[#dddddd]`}
-          >
-            {outOfStock(stock_status) ? (
-              <div
-                className={`whitespace-nowrap text-white flex justify-center items-center rounded-[4px]  left-[6rem] bottom-[96px] w-[36px] h-[36px]`}
-              >
-                out of stock
-              </div>
-            ) : (
-              <div
-                className={`text-[#0c831F] flex justify-center items-center rounded-[4px]  left-[6rem] bottom-[96px] w-[36px] h-[36px]`}
-              >
-                add
-              </div>
-            )}
-          </div>
+          <AddtoCartBtns
+            id={id}
+            name={name}
+            price={price}
+            image={image}
+            stock_quantity={stock_quantity}
+            stock_status={stock_status}
+          />
           {cart?.map((cartItem) => {
             if (cartItem.id === id) {
               return (
